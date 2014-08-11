@@ -4,7 +4,7 @@
   'Ubuntu': 'tmux', 
   'RedHat': 'tmux' } -%}
 {%- set pkgname = salt['pillar.get']('tmux:pkg:' ~ os, pkgdefault[os]) -%}
-{%- set confdefault = 'salt://vim/conf/.tmux.conf' -%}
+{%- set confdefault = 'salt://tmux/conf/.tmux.conf' -%}
 {%- set confsrc = salt['pillar.get']('tmux:conf', confdefault) -%}
 
 tmux.installed:
