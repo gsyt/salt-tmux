@@ -2,7 +2,7 @@
 {%- set users = salt['pillar.get']('vim:users', []) -%}
 {%- set pkgdefault = { 
   'Ubuntu': 'tmux', 
-  'RedHat': 'tmux' } -%}
+  'CentOS': 'tmux' } -%}
 {%- set pkgname = salt['pillar.get']('tmux:pkg:' ~ os, pkgdefault[os]) -%}
 
 tmux.purged:

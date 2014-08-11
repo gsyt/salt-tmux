@@ -2,7 +2,7 @@
 {%- set users = salt['pillar.get']('tmux:users', []) -%}
 {%- set pkgdefault = { 
   'Ubuntu': 'tmux', 
-  'RedHat': 'tmux' } -%}
+  'CentOS': 'tmux' } -%}
 {%- set pkgname = salt['pillar.get']('tmux:pkg:' ~ os, pkgdefault[os]) -%}
 {%- set confdefault = 'salt://tmux/conf/.tmux.conf' -%}
 {%- set confsrc = salt['pillar.get']('tmux:conf', confdefault) -%}
