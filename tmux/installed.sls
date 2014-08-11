@@ -1,9 +1,11 @@
 {% set os = salt['grains.get']('os') %}
-{% set users = salt['pillar.get']('vim:users', []) %}
+{% set users = salt['pillar.get']('tmux:users', []) %}
 {% set pkgdefault = { 
   'Ubuntu': 'tmux', 
   'RedHat': 'tmux' } %}
 {% set pkgname = salt['pillar.get']('tmux:pkg:' ~ os, pkgdefault[os]) %}
+{% set confdefault = 'salt://vim/conf/.tmux.conf' %}
+{% set confsrc = salt['pillar.get']('tmux:conf', confdefault) %}
 
 tmux.installed:
   pkg.latest:
@@ -20,7 +22,7 @@ tmux.installed:
 tmuxconf-{{ user }}:
   file.managed:
     - name: {{ userhome }}/.tmux.conf
-    - source: salt://vim/conf/.tmux.conf
+    - source: {{ confsrc }}
     - user: {{ user }}
   require:
 {% endfor %}
