@@ -2,5 +2,5 @@ include:
   - tmux.installed
 
 tmux:
-  require;
+  require:
     - sls: tmux.installed
