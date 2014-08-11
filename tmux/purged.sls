@@ -1,9 +1,9 @@
-{% set os = salt['grains.get']('os') %}
-{% set users = salt['pillar.get']('vim:users', []) %}
-{% set pkgdefault = { 
+{%- set os = salt['grains.get']('os') -%}
+{%- set users = salt['pillar.get']('vim:users', []) -%}
+{%- set pkgdefault = { 
   'Ubuntu': 'tmux', 
-  'RedHat': 'tmux' } %}
-{% set pkgname = salt['pillar.get']('tmux:pkg:' ~ os, pkgdefault[os]) %}
+  'RedHat': 'tmux' } -%}
+{%- set pkgname = salt['pillar.get']('tmux:pkg:' ~ os, pkgdefault[os]) -%}
 
 tmux.purged:
   pkg.purged:
