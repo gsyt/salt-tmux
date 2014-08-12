@@ -10,6 +10,8 @@ The following pillars are available for configuration:
   * tmux:conf
   * tmux:users
 
+Pacakge 'tmux' (or 'tmux:pkg:salt['pillar.get']('os')') must be available from configured repos
+
 Usage
 -----
 Apply state 'tmux.install' to install tmux to target minions
