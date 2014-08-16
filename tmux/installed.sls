@@ -1,27 +1,34 @@
-{%- set os = salt['grains.get']('os') -%}
-{%- set users = salt['pillar.get']('tmux:users', []) -%}
-{%- set pkgdefault = { 
-  'Ubuntu': 'tmux', 
-  'CentOS': 'tmux' } -%}
-{%- set pkgname = salt['pillar.get']('tmux:pkg:' ~ os, pkgdefault[os]) -%}
-{%- set confdefault = 'salt://tmux/conf/.tmux.conf' -%}
-{%- set confsrc = salt['pillar.get']('tmux:conf', confdefault) -%}
+{% from "tmux/map.jinja" import tmux with context %}
+
+{% set package = {
+  'upgrade': salt['pillar.get']('tmux:package:upgrade', False),
+} %}
+
+{% set config = {
+  'manage': salt['pillar.get']('tmux:config:manage', False),
+  'users': salt['pillar.get']('tmux:config:users', []),
+  'source': salt['pillar.get']('tmux:config:source', 'salt://tmux/conf/.tmux.conf'),
+} %}
 
 tmux.installed:
-  pkg.latest:
-    - name: {{ pkgname }}
-  {% if users %}
+  pkg.{{ 'latest' if package.upgrade else 'installed' }}:
+    - name: {{ tmux.package }}
+{% if config.manage %}
+  {% if config.users %}
   require:
-    {% for user in users %}
+    {% for user in config.users %}
     - sls: tmuxconf-{{ user }}
     {% endfor %}
   {% endif %}
+{% endif %}
 
-{% for user in users %}
-  {% set userhome = salt['user.info'](user).home %}
+{% if config.manage %}
+  {% for user in config.users %}
+    {% set userhome = salt['user.info'](user).home %}
 tmuxconf-{{ user }}:
   file.managed:
     - name: {{ userhome }}/.tmux.conf
-    - source: {{ confsrc }}
+    - source: {{ config.source }}
     - user: {{ user }}
-{%- endfor %}
+  {%- endfor %}
+{% endif %}
