@@ -3,14 +3,9 @@ salt-tmux
 
 Salt formula to set up and configure [tmux](tmux@tmuxhub.com:teddyphreak/salt-tmux.tmux)
 
-Requirements
+Parameters
 ------------
-The following pillars are available for configuration:
-  * tmux:pkg:salt['pillar.get']('os')
-  * tmux:conf
-  * tmux:users
-
-Pacakge 'tmux' (or 'tmux:pkg:salt['pillar.get']('os')') must be available from configured repos
+Please refer to example.pillar for a list of available pillar configuration options
 
 Usage
 -----

@@ -1,0 +1,10 @@
+tmux:
+  package:
+    upgrade: False
+  config:
+    manage: False
+    users:
+      - root
+    source: salt://tmux/conf/.tmux.conf
+  lookup:
+    package: tmux
