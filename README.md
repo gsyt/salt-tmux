@@ -11,7 +11,7 @@ Usage
 -----
 - Apply state 'tmux.install' to install tmux to target minions
 - Apply state 'tmux.purge' to remove tmux from target minions
-State 'tmux' is provided as an alias for 'tmux.install'
+- State 'tmux' is provided as an alias for 'tmux.install'
 
 Compatibility
 -------------
