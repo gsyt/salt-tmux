@@ -7,7 +7,7 @@
 {% set config = {
   'manage': salt['pillar.get']('tmux:config:manage', False),
   'users': salt['pillar.get']('tmux:config:users', []),
-  'source': salt['pillar.get']('tmux:config:source', 'salt://tmux/conf/.tmux.conf'),
+  'source': salt['pillar.get']('tmux:config:source', 'salt://tmux/conf/tmux.conf'),
 } %}
 
 tmux.installed:
