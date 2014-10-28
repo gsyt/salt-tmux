@@ -14,4 +14,7 @@ Usage
 
 Compatibility
 -------------
-Ubuntu 13.10, 14.04 and CentOS 6.x
+- CentOS 6.x
+- CentOS 7.x
+- Ubuntu Trusty
+- Ubuntu Utopic
